@@ -32,7 +32,7 @@ def mask_sentence(words, wps):
     ans_word = words[hole_num]
     words[hole_num] = '<MASK>'
 
-    return ' '.join(words), ans_word, hole_num
+    return ' '.join(words), ans_word
 
 
 ## 受け取った動詞を原形に変換する
@@ -66,9 +66,12 @@ def return_Q_material(sentence_list):
         base_verb = change2base(ans_word)                             # 動詞の原形を取得する
         verb_list = get_conjugated_verb_list(base_verb)               # 単語の活用形を取得する
 
+        # 選択肢リストの生成
+        option = [ans_word]
+        print(verb_list, ans_word)
+        verb_list.remove(ans_word)
         option = random.sample(verb_list, 3)
-        option.append(ans_word)
-        option = random.shuffle(option)
+        random.shuffle(option)
 
         q_sentences.append(q_sent)
         ans_words.append(ans_word)
@@ -83,4 +86,7 @@ if __name__ == '__main__':
       "The HR department is organizing a series of training sessions on workplace diversity and inclusion for all employees."
     ]
 
-    return_Q_material(sentence_list)
+    a,b,c = return_Q_material(sentence_list)
+    print(a)
+    print(b)
+    print(c)
