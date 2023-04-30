@@ -1,0 +1,18 @@
+div.qDisplay {
+  margin-top: 100px;
+}
+
+
+div.answerDisplay {
+  margin-top: 3%;
+  text-align: center;
+}
+
+
+h1.right {
+  color: red;
+}
+
+h1.wrong {
+  color: blue;
+}

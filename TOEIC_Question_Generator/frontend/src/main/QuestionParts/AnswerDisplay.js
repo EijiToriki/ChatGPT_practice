@@ -5,10 +5,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 
-function AnswerDisplay({ansWord}) {
+function AnswerDisplay({ansWord, setQNum, setAnsPush}) {
   const handleButton = () => {
-    console.log('push')
+    setQNum((prevQNum) => prevQNum + 1)
+    setAnsPush(false)
   }
+
   return (
     <Grid
       container

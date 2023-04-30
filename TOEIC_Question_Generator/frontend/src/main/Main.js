@@ -1,20 +1,26 @@
-import AnswerDisplay from './AnswerDisplay';
-import OptionDisplay from './OptionDisplay';
-import QDisplay from './QDisplay';
+import { useState } from 'react';
 import './css/Main.css';
+import QuestionTemplate from './QuestionTemplate';
+import QEndTemplate from './QEndTemplate';
 
 function Main({sentences, ansWords, options}) {
+  const [qNum, setQNum] = useState(0)             // 問題番号
+  const allQNum = sentences.length
+
   return (
     <>
-      <div className='qDisplay'>
-        <QDisplay sentence={sentences[0]} />
-      </div>
-      <div className='optionDisplay'>
-        <OptionDisplay option={options[0]} />
-      </div>
-      <div className='answerDisplay'>
-        <AnswerDisplay ansWord={ansWords[0]} />
-      </div>
+      {
+        qNum !== allQNum ?
+          <QuestionTemplate
+            sentences={sentences}
+            ansWords={ansWords}
+            options={options}
+            qNum={qNum}
+            setQNum={setQNum}
+          />
+        :
+          <QEndTemplate />
+      }
     </>
   );
 }
