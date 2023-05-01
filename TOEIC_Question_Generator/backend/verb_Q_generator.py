@@ -56,6 +56,26 @@ def get_conjugated_verb_list(base_verb):
     return res
 
 
+## 選択肢リストの生成
+def generate_option(ans_word, verb_list):
+    # 選択肢リストの生成
+    option = [ans_word]
+    
+    ## 最初の文字が大文字の場合、選択肢リストも大文字にする
+    if ans_word.istitle():
+        verb_list = [verb.capitalize() for verb in verb_list]
+
+    ## 諸々のライブラリの精度の問題で、答えがverb_listにない場合がある。
+    try:
+        verb_list.remove(ans_word)
+    except ValueError:
+        pass
+    option.extend(random.sample(verb_list, 3))
+    random.shuffle(option)
+
+    return option
+
+
 def return_Q_material(sentence_list):
     q_sentences = []        # 問題文を格納するリスト
     ans_words = []          # 答えの単語を格納するリスト
@@ -65,14 +85,9 @@ def return_Q_material(sentence_list):
         q_sent, ans_word = mask_sentence(words, wps)                  # 問題文となる動詞をマスクする。また、答えの単語も取得
         base_verb = change2base(ans_word)                             # 動詞の原形を取得する
         verb_list = get_conjugated_verb_list(base_verb)               # 単語の活用形を取得する
+        option = generate_option(ans_word, verb_list)                 # 選択肢リストの生成
 
-        # 選択肢リストの生成
-        option = [ans_word]
-        print(verb_list, ans_word)
-        verb_list.remove(ans_word)
-        option = random.sample(verb_list, 3)
-        random.shuffle(option)
-
+        ## 1問のワンセット（問題文、答え、選択肢）を追加
         q_sentences.append(q_sent)
         ans_words.append(ans_word)
         options.append(option)
@@ -87,6 +102,3 @@ if __name__ == '__main__':
     ]
 
     a,b,c = return_Q_material(sentence_list)
-    print(a)
-    print(b)
-    print(c)

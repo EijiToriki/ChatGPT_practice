@@ -1,10 +1,10 @@
 import './css/QDisplay.css'
 
-function QDisplay({sentence}) {
+function QDisplay({sentence, qNum}) {
   return (
     <>
       <div className='qTitle'>
-        Qestion1
+        Qestion{qNum + 1}
       </div>
       <div className='sentDisplay'>
         {sentence}

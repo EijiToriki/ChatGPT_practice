@@ -12,7 +12,7 @@ function QuestionTemplate({sentences, ansWords, options, qNum, setQNum}) {
   return (
     <>
       <div className='qDisplay'>
-        <QDisplay sentence={sentences[qNum]} />
+        <QDisplay sentence={sentences[qNum]} qNum={qNum} />
       </div>
       <div className='optionDisplay'>
         <OptionDisplay option={options[qNum]} setUserAns={setUserAns} />
