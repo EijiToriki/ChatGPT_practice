@@ -3,11 +3,13 @@ import axios from 'axios';
 import './App.css';
 import Header from './header/Header';
 import Main from './main/Main'
+import TopPage from './toppage/TopPage';
 
 const baseURL = "http://127.0.0.1:5000/part5"
 function App() {
   const [qMaterial, setQMaterial] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [qType, setQType] = useState('')
 
   useEffect(() => {
     async function fetchQuestion(){
@@ -16,19 +18,28 @@ function App() {
       setIsLoading(true)
     }
     fetchQuestion()
-  }, [])
+  }, [qType])
   
   return (
     <>
-      {isLoading ?
-        <div>
-          <Header />
-          <Main sentences={qMaterial.questions} ansWords={qMaterial.answers} options={qMaterial.options} />
-        </div>
+      <Header />
+      {
+      qType === '' ?
+        <TopPage setQType={setQType} />
       :
-        <div className='loading'>
-          <h1>読み込み中...</h1>
-        </div>
+        isLoading ?
+          <Main 
+            sentences={qMaterial.questions} 
+            ansWords={qMaterial.answers} 
+            options={qMaterial.options}
+            setIsLoading={setIsLoading}
+            setQType={setQType}
+            setQMaterial={setQMaterial} 
+          />
+        :
+          <div className='loading'>
+            <h1>読み込み中...</h1>
+          </div>
       }
     </>
   );

@@ -23,11 +23,10 @@ def ans_ChatGPT(question):
     return res
 
 
-if __name__ == '__main__':
+# ChatGPTより得られる英文を整形して提供する関数
+def sentences_provider():
     question = "TOEICのpart5で出題されそうな英文を3つ作って"
     res = ans_ChatGPT(question)
-
-    # res = "みました。\n1. Despite having a successful career in the finance industry, Jane is considering a change of profession and enrolling in culinary school.\n2. The new CEO's strategy to reduce overhead costs by 20% was met with opposition from some employees, who feared potential job cuts.\n3. The marketing team's efforts to promote the new product through social media channels have resulted in a significant increase in online engagement."
 
     res = res.split('\n')
 
@@ -35,6 +34,9 @@ if __name__ == '__main__':
     for sent in res:
         if len(sent) == len(sent.encode('utf-8')) and len(sent) > 10:
             sentences.append(sent)
-
-    print(sentences)
     
+    return sentences
+
+
+if __name__ == '__main__':
+    print(sentences_provider())

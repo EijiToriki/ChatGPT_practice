@@ -1,10 +1,25 @@
 import './css/QEndTemplate.css';
+import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 
-function QEndTemplate() {
+function QEndTemplate({setIsLoading, setQType, setQMaterial}) {
+  const backTopPage = () => {
+    setIsLoading(false)
+    setQType('')
+    setQMaterial([])
+  }
+
   return (
-    <>
-      <h1 className='QEndh1'>問題終了</h1>
-    </>
+    <div className='end-card'>
+      <Card sx={{ maxWidth: 345, margin: 'auto'}}>
+        <CardActionArea onClick={() => backTopPage()}>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              TopPageへ
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </div>
   );
 }
 

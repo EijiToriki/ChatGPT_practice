@@ -3,7 +3,7 @@ import './css/Main.css';
 import QuestionTemplate from './QuestionTemplate';
 import QEndTemplate from './QEndTemplate';
 
-function Main({sentences, ansWords, options}) {
+function Main({sentences, ansWords, options, setIsLoading, setQType, setQMaterial}) {
   const [qNum, setQNum] = useState(0)             // 問題番号
   const allQNum = sentences.length
 
@@ -19,7 +19,11 @@ function Main({sentences, ansWords, options}) {
             setQNum={setQNum}
           />
         :
-          <QEndTemplate />
+          <QEndTemplate 
+            setIsLoading={setIsLoading}
+            setQType={setQType}
+            setQMaterial={setQMaterial} 
+          />
       }
     </>
   );
