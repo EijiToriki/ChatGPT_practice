@@ -13,11 +13,6 @@ def after_request(response):
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   return response
 
-# sentence_list = [
-#   "The IT department is currently working on a software upgrade that will improve the company's network security.",
-#   "According to the latest sales figures, the company's revenue has increased by 15% compared to the same period last year.",
-#   "The HR department is organizing a series of training sessions on workplace diversity and inclusion for all employees."
-# ]
 
 @app.route('/part5')
 def provider_part5():
