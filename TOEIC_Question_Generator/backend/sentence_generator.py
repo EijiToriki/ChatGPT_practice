@@ -1,7 +1,8 @@
 ## 参考：https://www.a-c-japan.com/solution/chatgpt/chatgpt-api/
 import openai
+from nltk.tokenize import sent_tokenize
 
-openai.api_key = ""
+openai.api_key = "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"
 
 # ------------------------------------------------------------
 # チャットボットを呼び出す関数を設定
@@ -31,9 +32,12 @@ def sentences_provider():
     res = res.split('\n')
 
     sentences = []
-    for sent in res:
-        if len(sent) == len(sent.encode('utf-8')) and len(sent) > 10:
-            sentences.append(sent)
+    for sents in res:
+        if len(sents) == len(sents.encode('utf-8')) and len(sents) > 10:
+            sents = sents[3:]   # 1. の除去
+            sents = sent_tokenize(sents)
+            for sent in sents:
+                sentences.append(sent)
     
     return sentences
 
