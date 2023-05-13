@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from verb_Q_generator import return_Q_material
-from sentence_generator import sentences_provider
+from sentence_store import extract_sentence, store_DB
 
 app = Flask(__name__)
 CORS(app)
@@ -14,9 +14,29 @@ def after_request(response):
   return response
 
 
+@app.route('/')
+def generate_sentence():
+   ## ChatGPTで問題文を作成し、DBに格納
+   sentences = store_DB()
+   print(sentences)
+   ## 生成された英文を取得できるようにしておく
+   res_sentences = {
+      "sentences": sentences 
+   }
+
+   return jsonify(res_sentences)
+
+
 @app.route('/part5')
 def provider_part5():
-   sentence_list = sentences_provider()
+   ## DBより問題文を抽出
+   sentence_list = []
+   db_response = extract_sentence(3)
+
+   for res in db_response:
+      sentence_list.append(res[1])
+
+   ## 問題文を作成
    q_sentences, ans_words, options = return_Q_material(sentence_list)
    question_api = {
       'questions': q_sentences,

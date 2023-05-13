@@ -5,15 +5,23 @@ import Header from './header/Header';
 import Main from './main/Main'
 import TopPage from './toppage/TopPage';
 
-const baseURL = "http://127.0.0.1:5000/part5"
+const baseURL = "http://127.0.0.1:5000/"
 function App() {
   const [qMaterial, setQMaterial] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [qType, setQType] = useState('')
 
   useEffect(() => {
-    async function fetchQuestion(){
+    async function storeSentence(){
       const res = await axios.get(baseURL)
+      console.log(res)
+    }
+    storeSentence()
+  }, [])
+
+  useEffect(() => {
+    async function fetchQuestion(){
+      const res = await axios.get(baseURL + "part5")
       setQMaterial(res.data)
       setIsLoading(true)
     }
