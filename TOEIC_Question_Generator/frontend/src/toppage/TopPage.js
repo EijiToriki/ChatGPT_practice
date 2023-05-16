@@ -1,9 +1,12 @@
 import './css/TopPage.css';
 import { Grid, Card, CardContent, CardActions, Button, Typography, } from '@mui/material';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
-function TopPage({setQType}) {
+function TopPage() {
+  const navigate = useHistory()
+
   const moveVerbQPage = () => {
-    setQType('verb')
+    navigate.push('/verb')
   }
 
   const moveWordQPage = () => {

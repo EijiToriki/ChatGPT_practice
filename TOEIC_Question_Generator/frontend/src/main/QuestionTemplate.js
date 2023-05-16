@@ -26,9 +26,9 @@ function QuestionTemplate({sentences, ansWords, options, qNum, setQNum}) {
         <div className='answerDisplay'>
           {
             userAns === ansWords[qNum] ? 
-              <h1 className='right'>ｽｯｽﾊﾞﾗｼｲ!!</h1> 
+              <h1 className='right'>正解！</h1> 
             : 
-              <h1 className='wrong'>ﾊﾞｶｼﾞｬｰﾝ!!</h1>
+              <h1 className='wrong'>不正解…</h1>
           }
           <AnswerDisplay 
             ansWord={ansWords[qNum]} 
