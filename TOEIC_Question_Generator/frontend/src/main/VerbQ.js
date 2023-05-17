@@ -17,6 +17,7 @@ function VerbQ() {
   useEffect(() => {
     async function fetchQuestion(){
       const res = await axios.get(baseURL + "part5")
+      console.log(res.data)
       setQMaterial(res.data)
       setIsLoading(true)
     }
@@ -29,8 +30,8 @@ function VerbQ() {
         isLoading ?
           qNum !== allQNum ?
             <QuestionTemplate
-              sentences={qMaterial.sentences}
-              ansWords={qMaterial.ansWords}
+              sentences={qMaterial.questions}
+              ansWords={qMaterial.answers}
               options={qMaterial.options}
               qNum={qNum}
               setQNum={setQNum}

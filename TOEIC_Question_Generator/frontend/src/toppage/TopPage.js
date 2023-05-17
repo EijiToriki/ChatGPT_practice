@@ -17,9 +17,9 @@ function TopPage() {
   return (
     <div className='toppage'>
       <h3 className='toppage-direction'>問題の形式を選択せよ</h3>
-      <Grid container spacing={3} alignItems='center' justifyContent='center'>
+      <Grid container spacing={3} alignItems='center' justifycontent='center'>
         <Grid item xs={6} >
-          <Card sx={{ width: "50%", margin: 'auto'}} justifyContent='center'>
+          <Card sx={{ width: "50%", margin: 'auto'}} justifycontent='center'>
             <CardContent>
               <Typography variant="h5" component="div">
                 動詞の活用形問題
@@ -36,7 +36,7 @@ function TopPage() {
           </Card>
         </Grid>
         <Grid item xs={6}>
-          <Card sx={{ width: "50%", margin: 'auto' }} justifyContent='center'>
+          <Card sx={{ width: "50%", margin: 'auto' }} justifycontent='center'>
             <CardContent>
               <Typography variant="h5" component="div">
                 単語の意味問題

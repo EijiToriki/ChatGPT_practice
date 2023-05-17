@@ -1,5 +1,5 @@
 import { BrowserRouter, Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
 import Header from './header/Header';
@@ -8,7 +8,6 @@ import VerbQ from './main/VerbQ';
 
 const baseURL = "http://127.0.0.1:5000/"
 function App() {
-  
 
   // DBに文章をストックする
   useEffect(() => {

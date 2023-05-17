@@ -1,11 +1,14 @@
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import './css/QEndTemplate.css';
 import { Card, CardContent, Typography, CardActionArea } from '@mui/material';
 
-function QEndTemplate({setIsLoading, setQType, setQMaterial}) {
+function QEndTemplate({setIsLoading, setQMaterial}) {
+  const navigate = useHistory()
+
   const backTopPage = () => {
     setIsLoading(false)
-    setQType('')
     setQMaterial([])
+    navigate.push('/')
   }
 
   return (
