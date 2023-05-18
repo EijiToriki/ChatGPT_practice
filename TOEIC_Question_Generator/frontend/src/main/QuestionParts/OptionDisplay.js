@@ -1,6 +1,6 @@
 import './css/OptionDisplay.css'
 
-function OptionDisplay({option, setUserAns}) {
+function OptionDisplay({option, userAns, setUserAns}) {
   const changeRadio = (op) => {
     setUserAns(op)
   }
@@ -11,7 +11,13 @@ function OptionDisplay({option, setUserAns}) {
           option.map((op, idx) => {
             return(
               <label key={idx}>
-                <input type="radio" name="radioOption" onChange={() => changeRadio(op)}/>
+                <input 
+                  type="radio"
+                  value={op} 
+                  name="radioOption" 
+                  onChange={() => changeRadio(op)}
+                  checked={op === userAns}
+                />
                 {op}
               </label>
             )

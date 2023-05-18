@@ -15,7 +15,11 @@ function QuestionTemplate({sentences, ansWords, options, qNum, setQNum}) {
         <QDisplay sentence={sentences[qNum]} qNum={qNum} />
       </div>
       <div className='optionDisplay'>
-        <OptionDisplay option={options[qNum]} setUserAns={setUserAns} />
+        <OptionDisplay 
+          option={options[qNum]}
+          userAns={userAns} 
+          setUserAns={setUserAns} 
+        />
       </div>
       {
       !ansPush ?
