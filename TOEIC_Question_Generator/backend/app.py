@@ -1,6 +1,6 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
-from verb_Q_generator import return_Q_material
+from Verb_Q_generator import Verb_Q_generator
 from sentence_store import extract_sentence, store_DB
 
 app = Flask(__name__)
@@ -27,7 +27,7 @@ def generate_sentence():
    return jsonify(res_sentences)
 
 
-@app.route('/part5')
+@app.route('/verb')
 def provider_part5():
    ## DBより問題文を抽出
    sentence_list = []
@@ -37,7 +37,8 @@ def provider_part5():
       sentence_list.append(res[1])
 
    ## 問題文を作成
-   q_sentences, ans_words, options = return_Q_material(sentence_list)
+   VerbQGen = Verb_Q_generator()
+   q_sentences, ans_words, options = VerbQGen.return_Q_material(sentence_list)
    question_api = {
       'questions': q_sentences,
       'answers': ans_words,

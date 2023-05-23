@@ -16,7 +16,7 @@ function VerbQ() {
   // 問題の読み出し
   useEffect(() => {
     async function fetchQuestion(){
-      const res = await axios.get(baseURL + "part5")
+      const res = await axios.get(baseURL + "verb")
       console.log(res.data)
       setQMaterial(res.data)
       setIsLoading(true)
