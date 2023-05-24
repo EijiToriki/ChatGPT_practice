@@ -2,7 +2,7 @@
 import openai
 from nltk.tokenize import sent_tokenize
 
-openai.api_key = ""
+openai.api_key = "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"
 
 # ------------------------------------------------------------
 # チャットボットを呼び出す関数を設定

@@ -71,36 +71,33 @@ class Mean_Q_generator:
 
     ## 選択肢リストの生成
     def generate_option(self, ans_word):
-        # 選択肢リストの生成
-        option = [ans_word]
+        error_flag = True
+        ### chatGPT の返す答えが、想定外だったら繰り返す
+        while error_flag:
+            try:
+                option = [ans_word]
+                question = ans_word + "と意味の異なる単語を3つ教えて"
+                res = ans_ChatGPT(question)        # chatGPTに選択肢を作ってもらう
+                res = res.split('\n')
         
-        # ## 最初の文字が大文字の場合、選択肢リストも大文字にする
-        # if ans_word.istitle():
-        #     verb_list = [verb.capitalize() for verb in verb_list]
-
-        # ## 諸々のライブラリの精度の問題で、答えがverb_listにない場合がある。
-        # try:
-        #     verb_list.remove(ans_word)
-        # except ValueError:
-        #     pass
-        # option.extend(random.sample(verb_list, 3))
-        # random.shuffle(option)
+                for option_word in res:
+                    haihun_idx = option_word.index('-')
+                    option_word = option_word[3:haihun_idx-1]   # 1._のため3文字目スタート、ハイフン前まで取得で単語を抽出
+                    option.append(option_word.lower())
+                if len(option) == 4:
+                    error_flag = False
+                else:
+                    error_flag = True
+            except ValueError:
+                print(res)
+                error_flag = True
+            
+        ## 先頭大文字だった場合の処理
+        if ans_word.istitle():
+            option = [op.capitalize() for op in option]
 
         return option
-
-
-def generate_option(ans_word):
-    option = [ans_word]
-    question = ans_word + "と意味の異なる単語を3つ教えて"
-    res = ans_ChatGPT(question)
-    res = res.split('\n')
-      
-    for option_word in res:
-        haihun_idx = option_word.index('-')
-        option_word = option_word[3:haihun_idx-1]   # 1._のため3文字目スタート、ハイフン前まで取得で単語を抽出
-        option.append(option_word.lower())
-
-    print(option)       
+  
 
 
 if __name__ == '__main__':
@@ -110,12 +107,10 @@ if __name__ == '__main__':
       "The HR department is organizing a series of training sessions on workplace diversity and inclusion for all employees."
     ]
 
-    generate_option('increased')
 
-
-    # VerbQGen = Mean_Q_generator()
-    # a,b,c = VerbQGen.return_Q_material(sentence_list)
+    VerbQGen = Mean_Q_generator()
+    a,b,c = VerbQGen.return_Q_material(sentence_list)
     
-    # for i,j,k in zip(a,b,c):
-    #     print(i,j,k)
-    #     print()
+    for i,j,k in zip(a,b,c):
+        print(i,j,k)
+        print()
