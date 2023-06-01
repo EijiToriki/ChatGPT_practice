@@ -2,7 +2,7 @@
 import openai
 from nltk.tokenize import sent_tokenize
 
-openai.api_key = "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"
+openai.api_key = ""
 
 # ------------------------------------------------------------
 # チャットボットを呼び出す関数を設定
@@ -43,4 +43,6 @@ def sentences_provider():
 
 
 if __name__ == '__main__':
-    print(sentences_provider())
+    # print(sentences_provider())
+    question = "Tell me the nouns that appear frequently on the TOEIC."
+    print(ans_ChatGPT(question))

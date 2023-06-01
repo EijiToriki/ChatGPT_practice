@@ -1,3 +1,6 @@
+import time
+import schedule
+
 import sqlite3
 from sentence_generator import sentences_provider
 
@@ -26,6 +29,7 @@ def insert_sentence(conn, sentence_list):
 def store_DB():
   # 英文リストの取得
   sentence_list = sentences_provider()
+  print(sentence_list)
   
   # DB接続
   conn = connenct_DB()
@@ -58,5 +62,8 @@ def extract_sentence(n):
 
 
 if __name__ == '__main__':
-  # store_DB()
-  print(extract_sentence(2))
+  schedule.every(1).minutes.do(store_DB)
+
+  while True:
+    schedule.run_pending()
+    time.sleep(1)

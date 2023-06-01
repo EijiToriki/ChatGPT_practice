@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from Verb_Q_generator import Verb_Q_generator
-from sentence_store import extract_sentence, store_DB
+from sentence_store import extract_sentence
 
 app = Flask(__name__)
 CORS(app)
@@ -12,19 +12,6 @@ def after_request(response):
   response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
   response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
   return response
-
-
-@app.route('/')
-def generate_sentence():
-   ## ChatGPTで問題文を作成し、DBに格納
-   sentences = store_DB()
-   print(sentences)
-   ## 生成された英文を取得できるようにしておく
-   res_sentences = {
-      "sentences": sentences 
-   }
-
-   return jsonify(res_sentences)
 
 
 @app.route('/verb')
