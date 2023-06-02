@@ -1,3 +1,7 @@
+##################################################
+## ChatGPTにTOEICで出題されそうな英文を作ってもらう
+##################################################
+
 ## 参考：https://www.a-c-japan.com/solution/chatgpt/chatgpt-api/
 import openai
 from nltk.tokenize import sent_tokenize

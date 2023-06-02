@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from Verb_Q_generator import Verb_Q_generator
-from sentence_store import extract_sentence
+from sentence_word_getter import extract_sentence
 
 app = Flask(__name__)
 CORS(app)

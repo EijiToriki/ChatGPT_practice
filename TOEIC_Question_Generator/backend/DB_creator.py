@@ -23,12 +23,16 @@ cur.execute(
 )
 
 cur.execute(
-    'create table part5_words(id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT, pos INTEGER)'
+    'create table part5_words(id INTEGER PRIMARY KEY AUTOINCREMENT, word TEXT, pos TEXT, unique(word, pos))'
 )
 
 # データ挿入
 # cur.execute('insert into part5_sentences(sentences, is_used) values ("I like an apple", 0)')
 # cur.execute('insert into part5_sentences(sentences, is_used) values ("I like an orange", 0)')
+
+# cur.execute('insert into part5_words(word, pos) values ("like", "V")')
+# cur.execute('insert into part5_words(word, pos) values ("like", "V")')
+## ユニーク制約でエラー
 
 conn.commit()
 conn.close()
