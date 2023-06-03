@@ -6,7 +6,8 @@
 import openai
 from nltk.tokenize import sent_tokenize
 
-openai.api_key = ""
+with open('../../APIKey.txt') as f:
+    openai.api_key = f.read()
 
 # ------------------------------------------------------------
 # チャットボットを呼び出す関数を設定
@@ -43,10 +44,10 @@ def sentences_provider():
             for sent in sents:
                 sentences.append(sent)
     
+    print(sentences)
     return sentences
 
 
 if __name__ == '__main__':
-    # print(sentences_provider())
     question = "Tell me the nouns that appear frequently on the TOEIC."
     print(ans_ChatGPT(question))

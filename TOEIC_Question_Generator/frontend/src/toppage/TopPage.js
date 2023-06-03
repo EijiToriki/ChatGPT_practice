@@ -10,7 +10,7 @@ function TopPage() {
   }
 
   const moveWordQPage = () => {
-
+    navigate.push('/mean')
   }
 
 
@@ -48,7 +48,7 @@ function TopPage() {
               </Typography>
             </CardContent>
             <CardActions>
-              <Button size='large' disabled onClick={() => moveWordQPage()}>Comming Soon</Button>
+              <Button size='large' onClick={() => moveWordQPage()}>問題へ</Button>
             </CardActions>
           </Card>
         </Grid>

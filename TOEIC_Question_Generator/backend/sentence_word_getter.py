@@ -26,26 +26,30 @@ def extract_sentence(n):
   conn.commit()
   conn.close()
 
-  return res
+  sentences = []
+  for sent in res:
+    sentences.append(sent[1])
+
+  return sentences
 
 
 ## part5_words から問題の答えと同じ品詞の単語を3つ取り出す
-def extract_words(ans_pos):
+def extract_words(ans_word, ans_pos):
   conn = connenct_DB()
   cur = conn.cursor()
 
-  cur.execute('select sentences from part5_words where pos = :pos',{"pos": ans_pos })
+  cur.execute('select word from part5_words where pos = :pos and word != :word ',{"pos": ans_pos, "word": ans_word})
   res = cur.fetchall()
 
-  # sentences = []
-  # for i in range(len(res)):
-  #   sentences.append(res[i][0])
+  words = []
+  for i in range(len(res)):
+    words.append(res[i][0])
 
   cur.close()
   conn.commit()
   conn.close()
 
-  return None
+  return words
 
 
 if __name__ == '__main__':

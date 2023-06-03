@@ -2,14 +2,16 @@
 # 動詞の活用形を問う問題を生成する
 # ----------------------------------------
 
-import nltk
 import random
 import mlconjug3
+
+import SuperQ
+
 from nltk.stem import WordNetLemmatizer
 from collections import defaultdict
 
 
-class Verb_Q_generator:
+class Verb_Q_generator(SuperQ.SuperQ):
     verb_list = ["VB", "VBD", "VBG", "VBN", "VBP", "VBZ"]
     have_list = ["have", "had", "has"]
     be_list = ["am", "was", "are", "were", "is", "be"]
@@ -38,14 +40,6 @@ class Verb_Q_generator:
         return self.q_sentences, self.ans_words, self.options
 
 
-    ## 単語分割および品詞の取得を行う
-    def get_word_pos(self, sentence):
-        words = nltk.word_tokenize(sentence)  # 単語分割
-        wps = nltk.pos_tag(words)             # (単語, 品詞) のリスト : wps = word & pos の複数形
-
-        return words, wps
-
-
     ## 問題文とその答えを返す
     def mask_sentence(self, words, wps):
         # 名詞(NN, NNS), 動詞(VB, VBD, VBG, VBN, VBP, VBZ),
@@ -66,6 +60,7 @@ class Verb_Q_generator:
 
         hole_num = random.choice(pos_dict['v'])
 
+        ## 現在完了・受動態の場合は、リストとして hole_num に格納されているため判定が必要
         if isinstance(hole_num, int):
             ans_word = words[hole_num]
             words[hole_num] = '<MASK>'

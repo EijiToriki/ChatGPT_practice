@@ -33,6 +33,11 @@ def insert_word(conn, sentence_list):
   cur = conn.cursor()
 
   # 文を形態素解析して、品詞ごとに格納する
+  ## 格納しない品詞の集合
+  black_list = set(
+    ('CD', 'DT', 'EX', 'FW', 'LS', 'NNP', 'NNPS', 'PDT', 'POS', 'PRP$', 'RP', 'SYM', 'TO', 'UH', 'WDT', 'WP', 'WP$', 'WRB')
+  )
+
   for sentence in sentence_list:
     words = nltk.word_tokenize(sentence)  # 単語分割
     wps = nltk.pos_tag(words)             # (単語, 品詞) のリスト : wps = word & pos の複数形
@@ -40,10 +45,11 @@ def insert_word(conn, sentence_list):
         w = wp[0]   # 単語
         p = wp[1]   # 品詞
 
-        try:
-          cur.execute("insert into part5_words(word, pos) values (:word, :pos);", {"word": w, "pos": p})
-        except sqlite3.IntegrityError:
-          print('{} ({}) は、既にテーブルに格納されています'.format(w, p))
+        if p not in black_list and len(w) > 1:
+          try:
+            cur.execute("insert into part5_words(word, pos) values (:word, :pos);", {"word": w, "pos": p})
+          except sqlite3.IntegrityError:
+            print('{} ({}) は、既にテーブルに格納されています'.format(w, p))
 
   cur.close()
 
@@ -68,7 +74,7 @@ def store_DB():
 
 
 if __name__ == '__main__':
-  schedule.every(1).minutes.do(store_DB)
+  schedule.every(20).seconds.do(store_DB)
 
   while True:
     schedule.run_pending()
